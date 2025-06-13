@@ -1,42 +1,59 @@
 
-# HHEMM Dashboard
+# ⚾ HHEMM: Hitter Evaluation & Matchup Model
 
-🏟️ **HHEMM** (Hard-Hit Expected Metric Model) is a scoring model built on advanced Statcast metrics to identify elite offensive performers.
+This project powers a full Statcast-based dashboard to:
+- 📊 Score MLB hitters using advanced metrics (xBA, xwOBA, Hard Hit %, etc.)
+- ⚾ Display upcoming MLB matchups & probable pitchers
+- 🎯 Help identify prop betting edges (Hits, TBs, HRs)
 
-## 🚀 Features
+---
 
-- Filters hitters using Statcast metrics (xBA, xSLG, Contact%, K%, Barrel%, etc.)
-- Scores and ranks players using a weighted algorithm
-- Tags players with roles like:
-  - "Crush Specialist"
-  - "Lead-Off Contact"
-  - "Low-Variance Magnet"
-- Interactive Streamlit dashboard to upload data and view results
+## 🚀 How to Run
 
-## 📂 CSV Format
-
-Upload a CSV with the following columns (example):
-
-```
-Player,Team,xBA,xSLG,xwOBA,HardHit%,Contact%,K%,Barrel%,EV,Chase%,LineupSpot,xBA_vs_SameHandedPitching,RosterStatus
-```
-
-You can use `preprocess_statcast.py` to generate this format from live Statcast data using the `pybaseball` package.
-
-## 🧪 Run Locally
-
+1. Clone this repo  
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
-streamlit run app.py
 ```
 
-## 📦 Requirements
+3. Run the app:
+```bash
+streamlit run hhemm_system.py
+```
 
-- streamlit
-- pandas
-- numpy
-- pybaseball (optional, for Statcast data pull)
+---
 
-## 📬 Contact
+## 📂 Files
 
-Built by ripbookie. For support or ideas, open an issue or fork the repo!
+| File | Purpose |
+|------|---------|
+| `hhemm_system.py` | All-in-one Streamlit app + slate fetcher + scorer |
+| `requirements.txt` | Required packages |
+| `data/` | (Optional) Store your downloaded statcast CSVs |
+
+---
+
+## 📥 Input Data
+
+Upload a CSV from Baseball Savant with columns like:
+- `xBA`, `xSLG`, `xwOBA`, `Barrel%`, `Hard Hit %`, `K%`, `BB%`, `EV`, etc.
+
+---
+
+## 🧠 Model Logic
+
+Hitters are scored using a custom weighted model based on:
+- Contact quality
+- Discipline
+- Speed
+- Swing tendencies
+
+---
+
+## 🌐 Streamlit Deployment
+
+If deploying to [streamlit.io](https://streamlit.io):
+- Just push to GitHub
+- Point Streamlit Cloud to `hhemm_system.py`
+- Done!
+
